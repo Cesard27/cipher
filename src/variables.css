@@ -1,0 +1,15 @@
+:root {
+   --background-color-primary:     #FFFFFE;
+   --background-color-secondary:   #EBFFEB;
+   --background-color-tertiary:    #C80425;
+   --background-color-warning:     #240B36;
+
+   --text-color-light:  #E0E0E0;
+   --text-color-dark:   #212121;
+   --text-color-alt:   var(--background-color-tertiary);
+   --text-color-info: var(--background-color-warning);
+
+   --border-color-warning: var(--background-color-warning);
+   --border-color-informative: var(--background-color-tertiary);
+
+}
