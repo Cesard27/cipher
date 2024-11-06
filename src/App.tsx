@@ -6,12 +6,21 @@ import { Alphabet } from './components/alphabet';
 
 export const App = () => {
   const [numberKey, setNumberKey] = useState<number>();
+  const [direction, setDirection] = useState(true);
 
   const onsubmit = () => {
     console.log(numberKey)
 
   }
+  const onChangedDirection = () => {
+    setDirection(!direction)
+    // direction ? console.log('LEFT') : console.log('RIGHT')
+  }
 
+  const props = {
+    numberKey,
+    direction
+  }
   return (
     <div>
       <form onSubmit = {(event) => {event.preventDefault(); onsubmit}}>
@@ -44,6 +53,8 @@ export const App = () => {
                   className='form-check-input switch-shift'
                   role='switch' 
                   id='flexSwitchCheckDefault' 
+                  checked={direction}
+                  onChange={onChangedDirection}
                 />
               <label 
                 className='form-check-label'
@@ -71,7 +82,7 @@ export const App = () => {
       </form>
 
       <div className='alphabet-div'>
-        <Alphabet properties={numberKey}/>
+        <Alphabet {...props}/>
       </div>
 
       <div>
