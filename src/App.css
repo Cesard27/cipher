@@ -1,4 +1,5 @@
 @import '../src/variables.css';
+@import '../src/keyframes.css';
 
 #root {
   background: var(--background-color-primary);
@@ -27,9 +28,16 @@
 .shift-text-color {
   color: var(--text-color-alt);
   font-style: normal;
+  position: relative;
+}
+
+.shift-text-anim {
+  animation: fadeIn 1s;
+  -webkit-animation: fadeIn 1s;
 }
 
 .btn-shift {
+  margin: 1em 0 1em 0;
   background: var(--background-color-tertiary);
   color: var(--background-color-primary);
   width: 100%;
@@ -45,4 +53,36 @@
   color: var(--text-color-dark);
   background: var(--background-color-primary);
   border: solid 1px var(--background-color-tertiary);
+}
+
+.field-shift:focus {
+  color: var(--text-color-dark);
+  background: var(--background-color-secondary);
+  border: none;
+}
+
+/* .switch-shift {
+  background: var(--background-color-tertiary);
+}
+
+.switch-shift:disabled {
+  background: var(--background-color-secondary);
+} */
+
+
+
+.form-check .form-check-input {
+
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 255, 255, 255.25%29'/%3e%3c/svg%3e");
+  background-image: var(--bs-form-switch-bg);
+
+  float: none;
+  background-color: var(--background-color-tertiary);
+  margin-right: .1em;
+  width: 4em;
+}
+
+.form-check-input:checked {
+  background-color: var(--background-color-tertiary);
+  border: none;
 }

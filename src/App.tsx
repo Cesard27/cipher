@@ -37,11 +37,11 @@ export const App = () => {
                 </div>
               </div>
 
-            {/* <div className='col-2'>
+            <div className='col-2'>
               <div className='form-check form-switch'>
                 <input 
                   type="checkbox" 
-                  className='form-check-input ' 
+                  className='form-check-input switch-shift'
                   role='switch' 
                   id='flexSwitchCheckDefault' 
                 />
@@ -52,29 +52,37 @@ export const App = () => {
               </div>
             </div>
 
-            <div className='col-8'>
+            <div className='col-7'>
               <div className="input-group mb-1">
-                <span className="input-group-text" id="basic-addon1">abc</span>
-                <input type="text" className='form-control' placeholder='sentence'/>
+                <span className="input-group-text field-shift" id="basic-addon1">abc</span>
+                <input type="text" className='form-control field-shift' placeholder='sentence'/>
               </div>
-            </div> */}
-              {/* <div className='col-9'>
+            </div>
+              <div className='col-12'>
                 <input  
                   className='btn btn-shift ' 
                   type="submit" 
                   value={'Shift'}
                 />
-              </div> */}
+              </div>
 
           </div> 
         </div>
       </form>
+
       <div className='alphabet-div'>
         <Alphabet properties={numberKey}/>
       </div>
+
       <div>
-        word decrypted {numberKey}
+        <input 
+          className="form-control field-shift fw-bold" 
+          type="text" 
+          value={'word decrypted'} 
+          readOnly
+        />
       </div>
+
     </div>
   )
 }

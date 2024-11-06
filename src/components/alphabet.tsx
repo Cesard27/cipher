@@ -12,16 +12,15 @@ export const Alphabet = ( numberKey: any ) => {
    useEffect(() => {
       shiftAlphabet()
    }, [numberKey]);
-
    const isPopulated = () => {
-      return numberKey.properties > 0 ? numberKey.properties : 0
+      return numberKey.properties > 0 && numberKey.properties < 27 
+         ? numberKey.properties 
+         : 0
    }
    
    const shiftAlphabet = () => {
-      setShifted(alphabet.slice(numberKey.properties) + alphabet.slice(0, numberKey.properties))
-
+      setShifted(alphabet.slice(isPopulated()) + alphabet.slice(0, isPopulated()))
    }
-
    return (
       <div className="container ">
          <div className='row'>
@@ -30,7 +29,7 @@ export const Alphabet = ( numberKey: any ) => {
             {letters.map( (letter, index) => {
                   return <div className='col-2 fs-1' key={index}>
                      {letter}
-                     <div className='fw-bold shift-text-color' >
+                     <div className={'fw-bold shift-text-color shift-text-anim'} >
                         {shifted[index]}
                      </div>
                   </div>
