@@ -1,35 +1,58 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { Alphabet } from './components/alphabet';
+import { Cipher } from './components/Cipher';
+
+interface FormValues {
+  numberKey: number;
+  direction: boolean;
+  sentence: string;
+}
 
 export const App = () => {
-  const [numberKey, setNumberKey] = useState<number>();
-  const [direction, setDirection] = useState(true);
 
-  const onsubmit = () => {
-    console.log(numberKey)
+  const [data, setData] = useState<FormValues>(
+      {
+        numberKey: 0, 
+        direction: true, 
+        sentence: ''
+      }
+    );
+    
+  const [sendInfo, setSendInfo] = useState(false);
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSendInfo(true)
   }
+  
   const onChangedDirection = () => {
-    setDirection(!direction)
-    // direction ? console.log('LEFT') : console.log('RIGHT')
+    const direction = data.direction
+    setData((prevData) => ({
+      ...prevData,
+      direction: !direction
+    }))
   }
 
-  const props = {
-    numberKey,
-    direction
+  const onInputWrited = (event : React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target
+    setSendInfo(false)
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }))
   }
+
   return (
     <div>
-      <form onSubmit = {(event) => {event.preventDefault(); onsubmit}}>
+      <form onSubmit = {onSubmit}>
+
         <div className='container text-center'>
             <div className='row align-items-start'>
-
               <div className='col-3'>
                 <div className="input-group mb-1 ">
-
                   <span 
                     className="input-group-text field-shift" 
                     id="basic-addon1"                    
@@ -39,10 +62,11 @@ export const App = () => {
                     type="number" 
                     className='form-control field-shift' 
                     placeholder='key'
-                    onChange={(event) => {setNumberKey(event.target.valueAsNumber)}}
-                    value={numberKey}
+                    name='numberKey'
+                    onChange={onInputWrited}
+                    value={data.numberKey}
+                    required
                   />
-
                 </div>
               </div>
 
@@ -53,7 +77,8 @@ export const App = () => {
                   className='form-check-input switch-shift'
                   role='switch' 
                   id='flexSwitchCheckDefault' 
-                  checked={direction}
+                  name='direction'
+                  checked={data.direction}
                   onChange={onChangedDirection}
                 />
               <label 
@@ -66,35 +91,37 @@ export const App = () => {
             <div className='col-7'>
               <div className="input-group mb-1">
                 <span className="input-group-text field-shift" id="basic-addon1">abc</span>
-                <input type="text" className='form-control field-shift' placeholder='sentence'/>
-              </div>
-            </div>
-              <div className='col-12'>
-                <input  
-                  className='btn btn-shift ' 
-                  type="submit" 
-                  value={'Shift'}
+                <input 
+                  type="text" 
+                  className='form-control field-shift' 
+                  placeholder='sentence' 
+                  name='sentence'
+                  value={data.sentence} 
+                  onChange={onInputWrited}
+                  required
                 />
               </div>
+            </div>
+
+            <div className='col-12'>
+              <button 
+                className='btn btn-shift ' 
+                type="submit" 
+              >Shift</button>
+            </div>
 
           </div> 
         </div>
       </form>
 
       <div className='alphabet-div'>
-        <Alphabet {...props}/>
+        <Alphabet {...data}/>
       </div>
 
       <div>
-        <input 
-          className="form-control field-shift fw-bold" 
-          type="text" 
-          value={'word decrypted'} 
-          readOnly
-        />
+        {sendInfo && <Cipher {...data}/>}
       </div>
 
     </div>
   )
 }
-

@@ -10,12 +10,14 @@
 }
 
 .alphabet-div {
+  display: flex;
+  justify-self: center;
   background: var(--background-color-secondary);
   color: var(--text-color-dark);
   font-style: italic;
   border-radius: 1em;
   margin: 1.5em 1em 1em 0;
-  width: 100%;
+  width: 85%;
   height: 60%;
   padding: 0.5em;
   -webkit-border-radius: 1em;
